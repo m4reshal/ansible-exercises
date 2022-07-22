@@ -447,3 +447,561 @@
 }
 2022-06-27 21:20:45,738 p=20692 u=root n=ansible | PLAY RECAP **********************************************************************************************************************************************************************************************************************************
 2022-06-27 21:20:45,738 p=20692 u=root n=ansible | localhost                  : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2022-07-22 12:09:08,991 p=22 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:09:10,650 p=29 u=root n=ansible | PLAY [Hello World Play] ********************************************************
+2022-07-22 12:09:10,682 p=29 u=root n=ansible | TASK [Update /etc/motd file] ***************************************************
+2022-07-22 12:09:10,762 p=29 u=root n=ansible | fatal: [rheldev2]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: Could not resolve hostname rheldev2: Name or service not known", "unreachable": true}
+2022-07-22 12:09:10,904 p=29 u=root n=ansible | fatal: [rheldev]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: devops@192.168.1.182: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive).", "unreachable": true}
+2022-07-22 12:09:10,907 p=29 u=root n=ansible | PLAY RECAP *********************************************************************
+2022-07-22 12:09:10,907 p=29 u=root n=ansible | rheldev                    : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2022-07-22 12:09:10,907 p=29 u=root n=ansible | rheldev2                   : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2022-07-22 12:10:20,833 p=21 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:10:22,544 p=28 u=root n=ansible | PLAY [Hello World Play] ********************************************************
+2022-07-22 12:10:22,574 p=28 u=root n=ansible | TASK [Update /etc/motd file] ***************************************************
+2022-07-22 12:10:22,777 p=28 u=root n=ansible | fatal: [rheldev]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: devops@192.168.1.182: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive).", "unreachable": true}
+2022-07-22 12:10:22,780 p=28 u=root n=ansible | PLAY RECAP *********************************************************************
+2022-07-22 12:10:22,780 p=28 u=root n=ansible | rheldev                    : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2022-07-22 12:10:59,549 p=21 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:11:01,165 p=28 u=root n=ansible | PLAY [Hello World Play] ********************************************************
+2022-07-22 12:11:01,192 p=28 u=root n=ansible | TASK [Update /etc/motd file] ***************************************************
+2022-07-22 12:11:03,952 p=28 u=root n=ansible | ok: [rheldev]
+2022-07-22 12:11:03,978 p=28 u=root n=ansible | PLAY RECAP *********************************************************************
+2022-07-22 12:11:03,978 p=28 u=root n=ansible | rheldev                    : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2022-07-22 12:29:04,098 p=21 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:30:05,226 p=22 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:30:40,828 p=22 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:31:11,450 p=21 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:32:10,824 p=22 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:32:12,044 p=29 u=root n=ansible | {
+    "_meta": {
+        "hostvars": {
+            "rheldev": {
+                "ansible_host": "192.168.1.182",
+                "ansible_password": "redhat",
+                "http_port": 80
+            },
+            "rheldev2": {
+                "http_port": 80
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "istanbul",
+            "ungrouped"
+        ]
+    },
+    "databases": {
+        "hosts": [
+            "rheldev2"
+        ]
+    },
+    "istanbul": {
+        "children": [
+            "databases",
+            "webservers"
+        ]
+    },
+    "webservers": {
+        "hosts": [
+            "rheldev"
+        ]
+    }
+}
+2022-07-22 12:32:55,999 p=22 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:32:57,277 p=29 u=root n=ansible | @all:
+  |--@istanbul:
+  |  |--@databases:
+  |  |  |--rheldev2
+  |  |--@webservers:
+  |  |  |--rheldev
+  |--@ungrouped:
+2022-07-22 12:33:16,823 p=21 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:33:18,165 p=28 u=root n=ansible | {
+    "_meta": {
+        "hostvars": {
+            "rheldev": {
+                "ansible_host": "192.168.1.182",
+                "ansible_password": "redhat",
+                "http_port": 80
+            },
+            "rheldev2": {
+                "http_port": 80
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "istanbul",
+            "ungrouped"
+        ]
+    },
+    "databases": {
+        "hosts": [
+            "rheldev2"
+        ]
+    },
+    "istanbul": {
+        "children": [
+            "databases",
+            "webservers"
+        ]
+    },
+    "webservers": {
+        "hosts": [
+            "rheldev"
+        ]
+    }
+}
+2022-07-22 12:38:28,485 p=21 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:39:02,966 p=22 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:39:04,387 p=29 u=root n=ansible | {
+    "yum": {
+        "doc": {
+            "attributes": {
+                "action": {
+                    "description": "Indicates this has a corresponding action plugin so some parts of the options can be executed on the controller",
+                    "details": "In the case of yum, it has 2 action plugins that use it under the hood, M(ansible.builtin.yum) and M(ansible.builtin.package).",
+                    "support": "partial"
+                },
+                "async": {
+                    "description": "Supports being used with the C(async) keyword",
+                    "support": "none"
+                },
+                "bypass_host_loop": {
+                    "description": [
+                        "Forces a 'global' task that does not execute per host, this bypasses per host templating and serial, throttle and other loop considerations",
+                        "Conditionals will work as if C(run_once) is being used, variables used will be from the first available host",
+                        "This action will not work normally outside of lockstep strategies"
+                    ],
+                    "support": "none"
+                },
+                "check_mode": {
+                    "description": "Can run in check_mode and return changed status prediction withought modifying target",
+                    "support": "full"
+                },
+                "diff_mode": {
+                    "description": "Will return details on what has changed (or possibly needs changing in check_mode), when in diff mode",
+                    "support": "full"
+                },
+                "platform": {
+                    "description": "Target OS/families that can be operated against",
+                    "platforms": "rhel",
+                    "support": "N/A"
+                }
+            },
+            "author": [
+                "Ansible Core Team",
+                "Seth Vidal (@skvidal)",
+                "Eduard Snesarev (@verm666)",
+                "Berend De Schouwer (@berenddeschouwer)",
+                "Abhijeet Kasurde (@Akasurde)",
+                "Adam Miller (@maxamillion)"
+            ],
+            "collection": "ansible.builtin",
+            "description": [
+                "Installs, upgrade, downgrades, removes, and lists packages and groups with the I(yum) package manager.",
+                "This module only works on Python 2. If you require Python 3 support see the M(ansible.builtin.dnf) module."
+            ],
+            "filename": "/usr/lib/python3.8/site-packages/ansible/modules/yum.py",
+            "has_action": true,
+            "module": "yum",
+            "notes": [
+                "When used with a C(loop:) each package will be processed individually, it is much more efficient to pass the list directly to the I(name) option.",
+                "In versions prior to 1.9.2 this module installed and removed each package given to the yum module separately. This caused problems when packages specified by filename or url had to be installed or removed together. In 1.9.2 this was fixed so that packages are installed in one yum transaction. However, if one of the packages adds a new yum repository that the other packages come from (such as epel-release) then that package needs to be installed in a separate task. This mimics yum's command line behaviour.",
+                "Yum itself has two types of groups.  \"Package groups\" are specified in the rpm itself while \"environment groups\" are specified in a separate file (usually by the distribution).  Unfortunately, this division becomes apparent to ansible users because ansible needs to operate on the group of packages in a single transaction and yum requires groups to be specified in different ways when used in that way.  Package groups are specified as \"@development-tools\" and environment groups are \"@^gnome-desktop-environment\". Use the \"yum group list hidden ids\" command to see which category of group the group you want to install falls into.",
+                "The yum module does not support clearing yum cache in an idempotent way, so it was decided not to implement it, the only method is to use command and call the yum command directly, namely \"command: yum clean all\" https://github.com/ansible/ansible/pull/31450#issuecomment-352889579"
+            ],
+            "options": {
+                "allow_downgrade": {
+                    "default": "no",
+                    "description": [
+                        "Specify if the named package and version is allowed to downgrade a maybe already installed higher version of that package. Note that setting allow_downgrade=True can make this module behave in a non-idempotent way. The task could end up with a set of packages that does not match the complete list of specified packages to install (because dependencies between the downgraded package and others can cause changes to the packages which were in the earlier transaction)."
+                    ],
+                    "type": "bool",
+                    "version_added": "2.4",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "autoremove": {
+                    "default": "no",
+                    "description": [
+                        "If C(yes), removes all \"leaf\" packages from the system that were originally installed as dependencies of user-installed packages but which are no longer required by any such package. Should be used alone or when state is I(absent)",
+                        "NOTE: This feature requires yum >= 3.4.3 (RHEL/CentOS 7+)"
+                    ],
+                    "type": "bool",
+                    "version_added": "2.7",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "bugfix": {
+                    "default": "no",
+                    "description": [
+                        "If set to C(yes), and C(state=latest) then only installs updates that have been marked bugfix related."
+                    ],
+                    "type": "bool",
+                    "version_added": "2.6",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "cacheonly": {
+                    "default": "no",
+                    "description": [
+                        "Tells yum to run entirely from system cache; does not download or update metadata."
+                    ],
+                    "type": "bool",
+                    "version_added": "2.12",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "conf_file": {
+                    "description": [
+                        "The remote yum configuration file to use for the transaction."
+                    ],
+                    "type": "str",
+                    "version_added": "0.6",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "disable_excludes": {
+                    "description": [
+                        "Disable the excludes defined in YUM config files.",
+                        "If set to C(all), disables all excludes.",
+                        "If set to C(main), disable excludes defined in [main] in yum.conf.",
+                        "If set to C(repoid), disable excludes defined for given repo id."
+                    ],
+                    "type": "str",
+                    "version_added": "2.7",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "disable_gpg_check": {
+                    "default": "no",
+                    "description": [
+                        "Whether to disable the GPG checking of signatures of packages being installed. Has an effect only if state is I(present) or I(latest)."
+                    ],
+                    "type": "bool",
+                    "version_added": "1.2",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "disable_plugin": {
+                    "description": [
+                        "I(Plugin) name to disable for the install/update operation. The disabled plugins will not persist beyond the transaction."
+                    ],
+                    "elements": "str",
+                    "type": "list",
+                    "version_added": "2.5",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "disablerepo": {
+                    "description": [
+                        "I(Repoid) of repositories to disable for the install/update operation. These repos will not persist beyond the transaction. When specifying multiple repos, separate them with a C(\",\").",
+                        "As of Ansible 2.7, this can alternatively be a list instead of C(\",\") separated string"
+                    ],
+                    "elements": "str",
+                    "type": "list",
+                    "version_added": "0.9",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "download_dir": {
+                    "description": [
+                        "Specifies an alternate directory to store packages.",
+                        "Has an effect only if I(download_only) is specified."
+                    ],
+                    "type": "str",
+                    "version_added": "2.8",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "download_only": {
+                    "default": "no",
+                    "description": [
+                        "Only download the packages, do not install them."
+                    ],
+                    "type": "bool",
+                    "version_added": "2.7",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "enable_plugin": {
+                    "description": [
+                        "I(Plugin) name to enable for the install/update operation. The enabled plugin will not persist beyond the transaction."
+                    ],
+                    "elements": "str",
+                    "type": "list",
+                    "version_added": "2.5",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "enablerepo": {
+                    "description": [
+                        "I(Repoid) of repositories to enable for the install/update operation. These repos will not persist beyond the transaction. When specifying multiple repos, separate them with a C(\",\").",
+                        "As of Ansible 2.7, this can alternatively be a list instead of C(\",\") separated string"
+                    ],
+                    "elements": "str",
+                    "type": "list",
+                    "version_added": "0.9",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "exclude": {
+                    "description": [
+                        "Package name(s) to exclude when state=present, or latest"
+                    ],
+                    "elements": "str",
+                    "type": "list",
+                    "version_added": "2.0",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "install_repoquery": {
+                    "default": "yes",
+                    "description": [
+                        "If repoquery is not available, install yum-utils. If the system is registered to RHN or an RHN Satellite, repoquery allows for querying all channels assigned to the system. It is also required to use the 'list' parameter.",
+                        "NOTE: This will run and be logged as a separate yum transation which takes place before any other installation or removal.",
+                        "NOTE: This will use the system's default enabled repositories without regard for disablerepo/enablerepo given to the module."
+                    ],
+                    "required": false,
+                    "type": "bool",
+                    "version_added": "1.5",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "install_weak_deps": {
+                    "default": "yes",
+                    "description": [
+                        "Will also install all packages linked by a weak dependency relation.",
+                        "NOTE: This feature requires yum >= 4 (RHEL/CentOS 8+)"
+                    ],
+                    "type": "bool",
+                    "version_added": "2.8",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "installroot": {
+                    "default": "/",
+                    "description": [
+                        "Specifies an alternative installroot, relative to which all packages will be installed."
+                    ],
+                    "type": "str",
+                    "version_added": "2.3",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "list": {
+                    "description": [
+                        "Package name to run the equivalent of yum list C(--show-duplicates <package>) against. In addition to listing packages, use can also list the following: C(installed), C(updates), C(available) and C(repos).",
+                        "This parameter is mutually exclusive with I(name)."
+                    ],
+                    "type": "str"
+                },
+                "lock_timeout": {
+                    "default": 30,
+                    "description": [
+                        "Amount of time to wait for the yum lockfile to be freed."
+                    ],
+                    "required": false,
+                    "type": "int",
+                    "version_added": "2.8",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "name": {
+                    "aliases": [
+                        "pkg"
+                    ],
+                    "description": [
+                        "A package name or package specifier with version, like C(name-1.0).",
+                        "Comparison operators for package version are valid here C(>), C(<), C(>=), C(<=). Example - C(name>=1.0)",
+                        "If a previous version is specified, the task also needs to turn C(allow_downgrade) on. See the C(allow_downgrade) documentation for caveats with downgrading packages.",
+                        "When using state=latest, this can be C('*') which means run C(yum -y update).",
+                        "You can also pass a url or a local path to a rpm file (using state=present). To operate on several packages this can accept a comma separated string of packages or (as of 2.0) a list of packages."
+                    ],
+                    "elements": "str",
+                    "type": "list"
+                },
+                "releasever": {
+                    "description": [
+                        "Specifies an alternative release from which all packages will be installed."
+                    ],
+                    "type": "str",
+                    "version_added": "2.7",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "security": {
+                    "default": "no",
+                    "description": [
+                        "If set to C(yes), and C(state=latest) then only installs updates that have been marked security related."
+                    ],
+                    "type": "bool",
+                    "version_added": "2.4",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "skip_broken": {
+                    "default": "no",
+                    "description": [
+                        "Skip all unavailable packages or packages with broken dependencies without raising an error. Equivalent to passing the --skip-broken option."
+                    ],
+                    "type": "bool",
+                    "version_added": "2.3",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "state": {
+                    "choices": [
+                        "absent",
+                        "installed",
+                        "latest",
+                        "present",
+                        "removed"
+                    ],
+                    "description": [
+                        "Whether to install (C(present) or C(installed), C(latest)), or remove (C(absent) or C(removed)) a package.",
+                        "C(present) and C(installed) will simply ensure that a desired package is installed.",
+                        "C(latest) will update the specified package if it's not of the latest available version.",
+                        "C(absent) and C(removed) will remove the specified package.",
+                        "Default is C(None), however in effect the default action is C(present) unless the C(autoremove) option is enabled for this module, then C(absent) is inferred."
+                    ],
+                    "type": "str"
+                },
+                "update_cache": {
+                    "aliases": [
+                        "expire-cache"
+                    ],
+                    "default": "no",
+                    "description": [
+                        "Force yum to check if cache is out of date and redownload if needed. Has an effect only if state is I(present) or I(latest)."
+                    ],
+                    "type": "bool",
+                    "version_added": "1.9",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "update_only": {
+                    "default": "no",
+                    "description": [
+                        "When using latest, only update installed packages. Do not install packages.",
+                        "Has an effect only if state is I(latest)"
+                    ],
+                    "type": "bool",
+                    "version_added": "2.5",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "use_backend": {
+                    "choices": [
+                        "auto",
+                        "yum",
+                        "yum4",
+                        "dnf"
+                    ],
+                    "default": "auto",
+                    "description": [
+                        "This module supports C(yum) (as it always has), this is known as C(yum3)/C(YUM3)/C(yum-deprecated) by upstream yum developers. As of Ansible 2.7+, this module also supports C(YUM4), which is the \"new yum\" and it has an C(dnf) backend.",
+                        "By default, this module will select the backend based on the C(ansible_pkg_mgr) fact."
+                    ],
+                    "type": "str",
+                    "version_added": "2.7",
+                    "version_added_collection": "ansible.builtin"
+                },
+                "validate_certs": {
+                    "default": "yes",
+                    "description": [
+                        "This only applies if using a https url as the source of the rpm. e.g. for localinstall. If set to C(no), the SSL certificates will not be validated.",
+                        "This should only set to C(no) used on personally controlled sites using self-signed certificates as it avoids verifying the source site.",
+                        "Prior to 2.1 the code worked as if this was set to C(yes)."
+                    ],
+                    "type": "bool",
+                    "version_added": "2.1",
+                    "version_added_collection": "ansible.builtin"
+                }
+            },
+            "requirements": [
+                "yum"
+            ],
+            "short_description": "Manages packages with the I(yum) package manager",
+            "version_added": "historical",
+            "version_added_collection": "ansible.builtin"
+        },
+        "examples": "\n- name: Install the latest version of Apache\n  yum:\n    name: httpd\n    state: latest\n\n- name: Install Apache >= 2.4\n  yum:\n    name: httpd>=2.4\n    state: present\n\n- name: Install a list of packages (suitable replacement for 2.11 loop deprecation warning)\n  yum:\n    name:\n      - nginx\n      - postgresql\n      - postgresql-server\n    state: present\n\n- name: Install a list of packages with a list variable\n  yum:\n    name: \"{{ packages }}\"\n  vars:\n    packages:\n    - httpd\n    - httpd-tools\n\n- name: Remove the Apache package\n  yum:\n    name: httpd\n    state: absent\n\n- name: Install the latest version of Apache from the testing repo\n  yum:\n    name: httpd\n    enablerepo: testing\n    state: present\n\n- name: Install one specific version of Apache\n  yum:\n    name: httpd-2.2.29-1.4.amzn1\n    state: present\n\n- name: Upgrade all packages\n  yum:\n    name: '*'\n    state: latest\n\n- name: Upgrade all packages, excluding kernel & foo related packages\n  yum:\n    name: '*'\n    state: latest\n    exclude: kernel*,foo*\n\n- name: Install the nginx rpm from a remote repo\n  yum:\n    name: http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm\n    state: present\n\n- name: Install nginx rpm from a local file\n  yum:\n    name: /usr/local/src/nginx-release-centos-6-0.el6.ngx.noarch.rpm\n    state: present\n\n- name: Install the 'Development tools' package group\n  yum:\n    name: \"@Development tools\"\n    state: present\n\n- name: Install the 'Gnome desktop' environment group\n  yum:\n    name: \"@^gnome-desktop-environment\"\n    state: present\n\n- name: List ansible packages and register result to print with debug later\n  yum:\n    list: ansible\n  register: result\n\n- name: Install package with multiple repos enabled\n  yum:\n    name: sos\n    enablerepo: \"epel,ol7_latest\"\n\n- name: Install package with multiple repos disabled\n  yum:\n    name: sos\n    disablerepo: \"epel,ol7_latest\"\n\n- name: Download the nginx package but do not install it\n  yum:\n    name:\n      - nginx\n    state: latest\n    download_only: true\n",
+        "metadata": null,
+        "return": null
+    }
+}
+2022-07-22 12:42:01,275 p=22 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:42:02,526 p=29 u=root n=ansible | {
+    "ansible_host": "192.168.1.182",
+    "ansible_password": "redhat",
+    "http_port": 80
+}
+2022-07-22 12:42:20,798 p=21 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:42:56,480 p=21 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:43:28,388 p=21 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:43:29,610 p=28 u=root n=ansible | ERROR! No action selected, at least one of --host, --graph or --list needs to be specified.
+2022-07-22 12:43:37,600 p=21 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:43:38,899 p=28 u=root n=ansible | @databases:
+  |--rheldev2
+2022-07-22 12:43:44,689 p=21 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:43:46,062 p=28 u=root n=ansible | {
+    "_meta": {
+        "hostvars": {
+            "rheldev": {
+                "ansible_host": "192.168.1.182",
+                "ansible_password": "redhat",
+                "http_port": 80
+            },
+            "rheldev2": {
+                "http_port": 80
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "istanbul",
+            "ungrouped"
+        ]
+    },
+    "databases": {
+        "hosts": [
+            "rheldev2"
+        ]
+    },
+    "istanbul": {
+        "children": [
+            "databases",
+            "webservers"
+        ]
+    },
+    "webservers": {
+        "hosts": [
+            "rheldev"
+        ]
+    }
+}
+2022-07-22 12:45:28,758 p=21 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:45:29,968 p=28 u=root n=ansible | {
+    "ansible_host": "192.168.1.182",
+    "ansible_password": "redhat",
+    "http_port": 80
+}
+2022-07-22 12:47:13,779 p=22 u=root n=ansible | ERROR! - None of the provided paths were usable. Please specify a valid path with --collections-path
+2022-07-22 12:51:52,971 p=21 u=root n=ansible | {"/usr/share/ansible/collections/ansible_collections": {"amazon.aws": {"version": "2.0.0"}, "ansible.controller": {"version": "4.1.2"}, "ansible.netcommon": {"version": "2.4.0"}, "ansible.network": {"version": "1.2.0"}, "ansible.posix": {"version": "1.2.0"}, "ansible.security": {"version": "1.0.0"}, "ansible.utils": {"version": "2.4.2"}, "ansible.windows": {"version": "1.7.3"}, "arista.eos": {"version": "3.1.0"}, "cisco.asa": {"version": "2.1.0"}, "cisco.ios": {"version": "2.5.0"}, "cisco.iosxr": {"version": "2.5.0"}, "cisco.nxos": {"version": "2.7.1"}, "cloud.common": {"version": "2.0.3"}, "frr.frr": {"version": "1.0.3"}, "ibm.qradar": {"version": "1.0.3"}, "junipernetworks.junos": {"version": "2.7.1"}, "kubernetes.core": {"version": "2.1.1"}, "openvswitch.openvswitch": {"version": "2.0.2"}, "redhat.insights": {"version": "1.0.5"}, "redhat.openshift": {"version": "2.0.1"}, "redhat.rhv": {"version": "1.4.4"}, "redhat.satellite": {"version": "2.2.0"}, "servicenow.itsm": {"version": "1.2.0"}, "splunk.es": {"version": "1.0.2"}, "trendmicro.deepsec": {"version": "1.1.0"}, "vmware.vmware_rest": {"version": "2.1.0"}, "vyos.vyos": {"version": "2.6.0"}}}
+2022-07-22 12:59:49,226 p=21 u=root n=ansible | {"/usr/share/ansible/collections/ansible_collections": {"amazon.aws": {"version": "2.0.0"}, "ansible.controller": {"version": "4.1.2"}, "ansible.netcommon": {"version": "2.4.0"}, "ansible.network": {"version": "1.2.0"}, "ansible.posix": {"version": "1.2.0"}, "ansible.security": {"version": "1.0.0"}, "ansible.utils": {"version": "2.4.2"}, "ansible.windows": {"version": "1.7.3"}, "arista.eos": {"version": "3.1.0"}, "cisco.asa": {"version": "2.1.0"}, "cisco.ios": {"version": "2.5.0"}, "cisco.iosxr": {"version": "2.5.0"}, "cisco.nxos": {"version": "2.7.1"}, "cloud.common": {"version": "2.0.3"}, "frr.frr": {"version": "1.0.3"}, "ibm.qradar": {"version": "1.0.3"}, "junipernetworks.junos": {"version": "2.7.1"}, "kubernetes.core": {"version": "2.1.1"}, "openvswitch.openvswitch": {"version": "2.0.2"}, "redhat.insights": {"version": "1.0.5"}, "redhat.openshift": {"version": "2.0.1"}, "redhat.rhv": {"version": "1.4.4"}, "redhat.satellite": {"version": "2.2.0"}, "servicenow.itsm": {"version": "1.2.0"}, "splunk.es": {"version": "1.0.2"}, "trendmicro.deepsec": {"version": "1.1.0"}, "vmware.vmware_rest": {"version": "2.1.0"}, "vyos.vyos": {"version": "2.6.0"}}}
+2022-07-22 13:07:59,150 p=22 u=root n=ansible | {"/usr/share/ansible/collections/ansible_collections": {"amazon.aws": {"version": "2.0.0"}, "ansible.controller": {"version": "4.1.2"}, "ansible.netcommon": {"version": "2.4.0"}, "ansible.network": {"version": "1.2.0"}, "ansible.posix": {"version": "1.2.0"}, "ansible.security": {"version": "1.0.0"}, "ansible.utils": {"version": "2.4.2"}, "ansible.windows": {"version": "1.7.3"}, "arista.eos": {"version": "3.1.0"}, "cisco.asa": {"version": "2.1.0"}, "cisco.ios": {"version": "2.5.0"}, "cisco.iosxr": {"version": "2.5.0"}, "cisco.nxos": {"version": "2.7.1"}, "cloud.common": {"version": "2.0.3"}, "frr.frr": {"version": "1.0.3"}, "ibm.qradar": {"version": "1.0.3"}, "junipernetworks.junos": {"version": "2.7.1"}, "kubernetes.core": {"version": "2.1.1"}, "openvswitch.openvswitch": {"version": "2.0.2"}, "redhat.insights": {"version": "1.0.5"}, "redhat.openshift": {"version": "2.0.1"}, "redhat.rhv": {"version": "1.4.4"}, "redhat.satellite": {"version": "2.2.0"}, "servicenow.itsm": {"version": "1.2.0"}, "splunk.es": {"version": "1.0.2"}, "trendmicro.deepsec": {"version": "1.1.0"}, "vmware.vmware_rest": {"version": "2.1.0"}, "vyos.vyos": {"version": "2.6.0"}}}
+2022-07-22 13:08:00,797 p=29 u=root n=ansible | PLAY [Install Apache and Start Service] ****************************************
+2022-07-22 13:08:00,824 p=29 u=root n=ansible | TASK [Install httpd package] ***************************************************
+2022-07-22 13:08:21,437 p=29 u=root n=ansible | ok: [rheldev]
+2022-07-22 13:08:21,454 p=29 u=root n=ansible | TASK [Copy index file] *********************************************************
+2022-07-22 13:08:23,286 p=29 u=root n=ansible | ok: [rheldev]
+2022-07-22 13:08:23,298 p=29 u=root n=ansible | TASK [Start httpd service] *****************************************************
+2022-07-22 13:08:23,319 p=29 u=root n=ansible | skipping: [rheldev]
+2022-07-22 13:08:23,343 p=29 u=root n=ansible | PLAY RECAP *********************************************************************
+2022-07-22 13:08:23,343 p=29 u=root n=ansible | rheldev                    : ok=2    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+2022-07-22 13:09:10,887 p=21 u=root n=ansible | {"/usr/share/ansible/collections/ansible_collections": {"amazon.aws": {"version": "2.0.0"}, "ansible.controller": {"version": "4.1.2"}, "ansible.netcommon": {"version": "2.4.0"}, "ansible.network": {"version": "1.2.0"}, "ansible.posix": {"version": "1.2.0"}, "ansible.security": {"version": "1.0.0"}, "ansible.utils": {"version": "2.4.2"}, "ansible.windows": {"version": "1.7.3"}, "arista.eos": {"version": "3.1.0"}, "cisco.asa": {"version": "2.1.0"}, "cisco.ios": {"version": "2.5.0"}, "cisco.iosxr": {"version": "2.5.0"}, "cisco.nxos": {"version": "2.7.1"}, "cloud.common": {"version": "2.0.3"}, "frr.frr": {"version": "1.0.3"}, "ibm.qradar": {"version": "1.0.3"}, "junipernetworks.junos": {"version": "2.7.1"}, "kubernetes.core": {"version": "2.1.1"}, "openvswitch.openvswitch": {"version": "2.0.2"}, "redhat.insights": {"version": "1.0.5"}, "redhat.openshift": {"version": "2.0.1"}, "redhat.rhv": {"version": "1.4.4"}, "redhat.satellite": {"version": "2.2.0"}, "servicenow.itsm": {"version": "1.2.0"}, "splunk.es": {"version": "1.0.2"}, "trendmicro.deepsec": {"version": "1.1.0"}, "vmware.vmware_rest": {"version": "2.1.0"}, "vyos.vyos": {"version": "2.6.0"}}}
+2022-07-22 13:09:12,516 p=28 u=root n=ansible | PLAY [Hello World Play] ********************************************************
+2022-07-22 13:09:12,547 p=28 u=root n=ansible | TASK [Update /etc/motd file] ***************************************************
+2022-07-22 13:09:14,990 p=28 u=root n=ansible | ok: [rheldev]
+2022-07-22 13:09:15,016 p=28 u=root n=ansible | PLAY RECAP *********************************************************************
+2022-07-22 13:09:15,016 p=28 u=root n=ansible | rheldev                    : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2022-07-22 14:27:47,192 p=21 u=root n=ansible | {"/usr/share/ansible/collections/ansible_collections": {"amazon.aws": {"version": "2.0.0"}, "ansible.controller": {"version": "4.1.2"}, "ansible.netcommon": {"version": "2.4.0"}, "ansible.network": {"version": "1.2.0"}, "ansible.posix": {"version": "1.2.0"}, "ansible.security": {"version": "1.0.0"}, "ansible.utils": {"version": "2.4.2"}, "ansible.windows": {"version": "1.7.3"}, "arista.eos": {"version": "3.1.0"}, "cisco.asa": {"version": "2.1.0"}, "cisco.ios": {"version": "2.5.0"}, "cisco.iosxr": {"version": "2.5.0"}, "cisco.nxos": {"version": "2.7.1"}, "cloud.common": {"version": "2.0.3"}, "frr.frr": {"version": "1.0.3"}, "ibm.qradar": {"version": "1.0.3"}, "junipernetworks.junos": {"version": "2.7.1"}, "kubernetes.core": {"version": "2.1.1"}, "openvswitch.openvswitch": {"version": "2.0.2"}, "redhat.insights": {"version": "1.0.5"}, "redhat.openshift": {"version": "2.0.1"}, "redhat.rhv": {"version": "1.4.4"}, "redhat.satellite": {"version": "2.2.0"}, "servicenow.itsm": {"version": "1.2.0"}, "splunk.es": {"version": "1.0.2"}, "trendmicro.deepsec": {"version": "1.1.0"}, "vmware.vmware_rest": {"version": "2.1.0"}, "vyos.vyos": {"version": "2.6.0"}}}
+2022-07-22 14:27:48,848 p=28 u=root n=ansible | PLAY [Install Apache and Start Service] ****************************************
+2022-07-22 14:27:48,882 p=28 u=root n=ansible | TASK [Check service using URI module] ******************************************
+2022-07-22 14:27:48,909 p=28 u=root n=ansible | fatal: [rheldev -> localhost]: FAILED! => {"msg": "The task includes an option with an undefined variable. The error was: 'rheldev' is undefined\n\nThe error appears to be in '/root/ansible-exercises/02_check_service.yaml': line 10, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n  tasks:\n    - name: Check service using URI module\n      ^ here\n"}
+2022-07-22 14:27:48,910 p=28 u=root n=ansible | NO MORE HOSTS LEFT *************************************************************
+2022-07-22 14:27:48,912 p=28 u=root n=ansible | PLAY RECAP *********************************************************************
+2022-07-22 14:27:48,912 p=28 u=root n=ansible | rheldev                    : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2022-07-22 14:28:22,771 p=22 u=root n=ansible | {"/usr/share/ansible/collections/ansible_collections": {"amazon.aws": {"version": "2.0.0"}, "ansible.controller": {"version": "4.1.2"}, "ansible.netcommon": {"version": "2.4.0"}, "ansible.network": {"version": "1.2.0"}, "ansible.posix": {"version": "1.2.0"}, "ansible.security": {"version": "1.0.0"}, "ansible.utils": {"version": "2.4.2"}, "ansible.windows": {"version": "1.7.3"}, "arista.eos": {"version": "3.1.0"}, "cisco.asa": {"version": "2.1.0"}, "cisco.ios": {"version": "2.5.0"}, "cisco.iosxr": {"version": "2.5.0"}, "cisco.nxos": {"version": "2.7.1"}, "cloud.common": {"version": "2.0.3"}, "frr.frr": {"version": "1.0.3"}, "ibm.qradar": {"version": "1.0.3"}, "junipernetworks.junos": {"version": "2.7.1"}, "kubernetes.core": {"version": "2.1.1"}, "openvswitch.openvswitch": {"version": "2.0.2"}, "redhat.insights": {"version": "1.0.5"}, "redhat.openshift": {"version": "2.0.1"}, "redhat.rhv": {"version": "1.4.4"}, "redhat.satellite": {"version": "2.2.0"}, "servicenow.itsm": {"version": "1.2.0"}, "splunk.es": {"version": "1.0.2"}, "trendmicro.deepsec": {"version": "1.1.0"}, "vmware.vmware_rest": {"version": "2.1.0"}, "vyos.vyos": {"version": "2.6.0"}}}
+2022-07-22 14:28:24,428 p=29 u=root n=ansible | PLAY [Install Apache and Start Service] ****************************************
+2022-07-22 14:28:24,466 p=29 u=root n=ansible | TASK [Check service using URI module] ******************************************
+2022-07-22 14:28:25,180 p=29 u=root n=ansible | ok: [rheldev -> localhost]
+2022-07-22 14:28:25,204 p=29 u=root n=ansible | PLAY RECAP *********************************************************************
+2022-07-22 14:28:25,204 p=29 u=root n=ansible | rheldev                    : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2022-07-22 14:28:32,658 p=21 u=root n=ansible | {"/usr/share/ansible/collections/ansible_collections": {"amazon.aws": {"version": "2.0.0"}, "ansible.controller": {"version": "4.1.2"}, "ansible.netcommon": {"version": "2.4.0"}, "ansible.network": {"version": "1.2.0"}, "ansible.posix": {"version": "1.2.0"}, "ansible.security": {"version": "1.0.0"}, "ansible.utils": {"version": "2.4.2"}, "ansible.windows": {"version": "1.7.3"}, "arista.eos": {"version": "3.1.0"}, "cisco.asa": {"version": "2.1.0"}, "cisco.ios": {"version": "2.5.0"}, "cisco.iosxr": {"version": "2.5.0"}, "cisco.nxos": {"version": "2.7.1"}, "cloud.common": {"version": "2.0.3"}, "frr.frr": {"version": "1.0.3"}, "ibm.qradar": {"version": "1.0.3"}, "junipernetworks.junos": {"version": "2.7.1"}, "kubernetes.core": {"version": "2.1.1"}, "openvswitch.openvswitch": {"version": "2.0.2"}, "redhat.insights": {"version": "1.0.5"}, "redhat.openshift": {"version": "2.0.1"}, "redhat.rhv": {"version": "1.4.4"}, "redhat.satellite": {"version": "2.2.0"}, "servicenow.itsm": {"version": "1.2.0"}, "splunk.es": {"version": "1.0.2"}, "trendmicro.deepsec": {"version": "1.1.0"}, "vmware.vmware_rest": {"version": "2.1.0"}, "vyos.vyos": {"version": "2.6.0"}}}
+2022-07-22 14:28:34,126 p=28 u=root n=ansible | Using /root/ansible-exercises/ansible.cfg as config file
+2022-07-22 14:28:34,429 p=28 u=root n=ansible | PLAY [Install Apache and Start Service] ****************************************
+2022-07-22 14:28:34,472 p=28 u=root n=ansible | TASK [Check service using URI module] ******************************************
+2022-07-22 14:28:35,251 p=28 u=root n=ansible | ok: [rheldev -> localhost] => {"accept_ranges": "bytes", "changed": false, "connection": "close", "content_length": "34", "content_type": "text/html; charset=UTF-8", "cookies": {}, "cookies_string": "", "date": "Fri, 22 Jul 2022 14:32:53 GMT", "elapsed": 0, "etag": "\"22-5e0750e6a6ea8\"", "last_modified": "Thu, 02 Jun 2022 11:10:41 GMT", "msg": "OK (34 bytes)", "redirected": false, "server": "Apache/2.4.6 (Red Hat Enterprise Linux)", "status": 200, "url": "http://192.168.1.182"}
+2022-07-22 14:28:35,276 p=28 u=root n=ansible | PLAY RECAP *********************************************************************
+2022-07-22 14:28:35,276 p=28 u=root n=ansible | rheldev                    : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   

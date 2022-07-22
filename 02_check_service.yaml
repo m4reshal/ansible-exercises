@@ -1,0 +1,14 @@
+---
+- name: Install Apache and Start Service
+  remote_user: devops
+  become: yes
+  become_method: sudo
+  become_user: root
+  gather_facts: false
+  hosts: all
+  tasks:
+    - name: Check service using URI module
+      uri:
+        url: "http://{{ hostvars['rheldev'].ansible_host }}"
+      delegate_to: localhost
+      run_once: true

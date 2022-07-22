@@ -1,0 +1,20 @@
+---
+ansible-navigator:
+  ansible:
+    inventories:
+    - ./inventory
+
+  execution-environment:
+    image: registry.redhat.io/ansible-automation-platform-21/ee-supported-rhel8:latest
+    #image: registry.redhat.io/ansible-automation-platform-21/ee-29-rhel8:latest
+    #image: registry.redhat.io/ansible-automation-platform-21/ee-minimal-rhel8:latest
+    enabled: true
+    container-engine: podman
+    pull-policy: missing
+    volume-mounts:
+    - src: "/etc/ansible/"
+      dest: "/etc/ansible/"
+  playbook-artifact:
+    enable: True
+    replay: /tmp/test_artifact.json
+    save-as: /tmp/test_artifact.json

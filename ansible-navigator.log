@@ -1,0 +1,170 @@
+220722120135.521 WARNING 'ansible_navigator.run' Dirty exit, killing the pid
+220722120154.599 WARNING 'ansible_navigator.image_manager.puller._log_message' Image inspection failed, image assumed to be corrupted or missing
+220722120425.970 WARNING 'ansible_navigator.run' Dirty exit, killing the pid
+220722122801.759 INFO 'ansible_navigator.setup_logger' New ansible-navigator instance, logging initialized
+220722122801.759 INFO 'ansible_navigator.setup_logger' New ansible-runner instance, logging initialized
+220722122801.759 DEBUG 'ansible_navigator.main' Share directory '/usr/lib/python3.8/share/ansible_navigator' not found (development path)
+220722122801.759 DEBUG 'ansible_navigator.main' Share directory '/root/.local/share/ansible_navigator' not found (userbase)
+220722122801.759 DEBUG 'ansible_navigator.main' Share directory '/usr/share/ansible_navigator' found (sys.prefix)
+220722122801.759 DEBUG 'ansible_navigator.main' Default collection_doc_cache_path set to: /root/.cache/ansible-navigator/collection_doc_cache.db
+220722122801.759 DEBUG 'ansible_navigator.main' EDITOR environment variable not set
+220722122801.759 DEBUG 'ansible_navigator.main' Default editor_command set to: vi +{line_number} {filename}
+220722122801.759 DEBUG 'ansible_navigator.main' No config file set by ANSIBLE_NAVIGATOR_CONFIG
+220722122801.759 DEBUG 'ansible_navigator.main' Looking in /root
+220722122801.759 DEBUG 'ansible_navigator.main' Looking for '/root/.ansible-navigator.yml', '/root/.ansible-navigator.yaml' and '/root/.ansible-navigator.json'
+220722122801.759 DEBUG 'ansible_navigator.main' Found 0: 
+220722122801.759 DEBUG 'ansible_navigator.main' Looking in /root/ansible-exercises
+220722122801.759 DEBUG 'ansible_navigator.main' Looking for '/root/ansible-exercises/ansible-navigator.yml', '/root/ansible-exercises/ansible-navigator.yaml' and '/root/ansible-exercises/ansible-navigator.json'
+220722122801.759 DEBUG 'ansible_navigator.main' Found 1: '/root/ansible-exercises/ansible-navigator.yaml'
+220722122801.759 DEBUG 'ansible_navigator.main' All found 1: '/root/ansible-exercises/ansible-navigator.yaml'
+220722122801.759 DEBUG 'ansible_navigator.main' Using: /root/ansible-exercises/ansible-navigator.yaml
+220722122801.759 DEBUG 'ansible_navigator.main' Using settings file at /root/ansible-exercises/ansible-navigator.yaml in search path
+220722122801.759 DEBUG 'ansible_navigator.main' Command provided: 'doc -l'
+220722122801.759 DEBUG 'ansible_navigator.main' ansible-navigator.ansible-runner.artifact-dir not found in settings file
+220722122801.759 DEBUG 'ansible_navigator.main' ansible-navigator.ansible-runner.rotate-artifacts-count not found in settings file
+220722122801.759 DEBUG 'ansible_navigator.main' ansible-navigator.ansible-runner.timeout not found in settings file
+220722122801.759 DEBUG 'ansible_navigator.main' ansible-navigator.app not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.ansible.cmdline not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.collection-doc-cache-path not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.ansible.config not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.execution-environment.container-options not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.color.enable not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.editor.command not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.editor.console not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.help-config not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.help-doc not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.help-inventory not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.help-playbook not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.inventory-columns not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.logging.append not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.logging.file not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.logging.level not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.mode not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.color.osc4 not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.execution-environment.environment-variables.pass not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.ansible.playbook not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.playbook-artifact.enable not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.playbook-artifact.replay not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.playbook-artifact.save-as not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.documentation.plugin.name not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.documentation.plugin.type not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' ansible-navigator.execution-environment.environment-variables.set not found in settings file
+220722122801.760 DEBUG 'ansible_navigator.main' Completed post processing for ansible_runner_artifact_dir. (changed=False)
+220722122801.760 DEBUG 'ansible_navigator.main' Completed post processing for ansible_runner_rotate_artifacts_count. (changed=False)
+220722122801.760 DEBUG 'ansible_navigator.main' Completed post processing for ansible_runner_timeout. (changed=False)
+220722122801.760 DEBUG 'ansible_navigator.main' Completed post processing for cmdline. (changed=False)
+220722122801.760 DEBUG 'ansible_navigator.main' Completed post processing for collection_doc_cache_path. (changed=False)
+220722122801.760 DEBUG 'ansible_navigator.main' Completed post processing for container_engine. (changed=False)
+220722122801.760 DEBUG 'ansible_navigator.main' Completed post processing for container_options. (changed=False)
+220722122801.760 DEBUG 'ansible_navigator.main' Completed post processing for display_color. (changed=False)
+220722122801.760 DEBUG 'ansible_navigator.main' Completed post processing for editor_console. (changed=False)
+220722122801.760 DEBUG 'ansible_navigator.main' Completed post processing for execution_environment. (changed=False)
+220722122801.760 DEBUG 'ansible_navigator.main' Completed post processing for execution_environment_image. (changed=False)
+220722122801.760 DEBUG 'ansible_navigator.main' Completed post processing for execution_environment_volume_mounts. (changed=True)
+220722122801.760 DEBUG 'ansible_navigator.main'  before: '[{'src': '/etc/ansible/', 'dest': '/etc/ansible/'}]'
+220722122801.760 DEBUG 'ansible_navigator.main'  after: '['/etc/ansible/:/etc/ansible/']'
+220722122801.760 DEBUG 'ansible_navigator.main' Completed post processing for help_config. (changed=False)
+220722122801.761 DEBUG 'ansible_navigator.main' Completed post processing for help_doc. (changed=False)
+220722122801.761 DEBUG 'ansible_navigator.main' Completed post processing for help_inventory. (changed=False)
+220722122801.761 DEBUG 'ansible_navigator.main' Completed post processing for help_playbook. (changed=False)
+220722122801.761 DEBUG 'ansible_navigator.main' Completed post processing for inventory. (changed=True)
+220722122801.761 DEBUG 'ansible_navigator.main'  before: '['./inventory']'
+220722122801.761 DEBUG 'ansible_navigator.main'  after: '['/root/ansible-exercises/inventory']'
+220722122801.761 DEBUG 'ansible_navigator.main' Completed post processing for inventory_column. (changed=False)
+220722122801.761 DEBUG 'ansible_navigator.main' Completed post processing for log_append. (changed=False)
+220722122801.761 DEBUG 'ansible_navigator.main' Completed post processing for log_file. (changed=False)
+220722122801.761 DEBUG 'ansible_navigator.main' Completed post processing for mode. (changed=False)
+220722122801.761 DEBUG 'ansible_navigator.main' Completed post processing for osc4. (changed=False)
+220722122801.761 DEBUG 'ansible_navigator.main' Completed post processing for pass_environment_variable. (changed=False)
+220722122801.761 DEBUG 'ansible_navigator.main' Completed post processing for playbook. (changed=False)
+220722122801.761 DEBUG 'ansible_navigator.main' Completed post processing for playbook_artifact_enable. (changed=False)
+220722122801.761 DEBUG 'ansible_navigator.main' Completed post processing for playbook_artifact_replay. (changed=False)
+220722122801.761 DEBUG 'ansible_navigator.main' Completed post processing for plugin_name. (changed=False)
+220722122801.761 DEBUG 'ansible_navigator.main' Completed post processing for set_environment_variable. (changed=False)
+220722122801.761 WARNING 'ansible_navigator.main' Configuration errors encountered, rolling back to previous configuration.
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: ansible_runner_artifact_dir = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: ansible_runner_rotate_artifacts_count = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: ansible_runner_timeout = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: app = 'doc' (str/cli parameters)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: cmdline = '['-l']' (list/cli parameters)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: collection_doc_cache_path = '/root/.cache/ansible-navigator/collection_doc_cache.db' (str/default configuration value)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: config = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: container_engine = 'podman' (str/user provided configuration file)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: container_options = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: display_color = 'True' (bool/default configuration value)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: editor_command = 'vi +{line_number} {filename}' (str/default configuration value)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: editor_console = 'True' (bool/default configuration value)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: execution_environment = 'True' (bool/user provided configuration file)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: execution_environment_image = 'registry.redhat.io/ansible-automation-platform-21/ee-supported-rhel8:latest' (str/user provided configuration file)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: execution_environment_volume_mounts = '['/etc/ansible/:/etc/ansible/']' (list/user provided configuration file)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: help_config = 'False' (bool/default configuration value)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: help_doc = 'False' (bool/default configuration value)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: help_inventory = 'False' (bool/default configuration value)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: help_playbook = 'False' (bool/default configuration value)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: inventory = '['/root/ansible-exercises/inventory']' (list/user provided configuration file)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: inventory_column = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: log_append = 'True' (bool/default configuration value)
+220722122801.761 DEBUG 'ansible_navigator.main' Prior to rollback: log_file = '/root/ansible-exercises/ansible-navigator.log' (str/default configuration value)
+220722122801.762 DEBUG 'ansible_navigator.main' Prior to rollback: log_level = 'warning' (str/default configuration value)
+220722122801.762 DEBUG 'ansible_navigator.main' Prior to rollback: mode = 'interactive' (str/default configuration value)
+220722122801.762 DEBUG 'ansible_navigator.main' Prior to rollback: osc4 = 'True' (bool/default configuration value)
+220722122801.762 DEBUG 'ansible_navigator.main' Prior to rollback: pass_environment_variable = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' Prior to rollback: playbook = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' Prior to rollback: playbook_artifact_enable = 'True' (bool/default configuration value)
+220722122801.762 DEBUG 'ansible_navigator.main' Prior to rollback: playbook_artifact_replay = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' Prior to rollback: playbook_artifact_save_as = '{playbook_dir}/{playbook_name}-artifact-{ts_utc}.json' (str/default configuration value)
+220722122801.762 DEBUG 'ansible_navigator.main' Prior to rollback: plugin_name = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' Prior to rollback: plugin_type = 'module' (str/default configuration value)
+220722122801.762 DEBUG 'ansible_navigator.main' Prior to rollback: pull_policy = 'missing' (str/user provided configuration file)
+220722122801.762 DEBUG 'ansible_navigator.main' Prior to rollback: set_environment_variable = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: ansible_runner_artifact_dir = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: ansible_runner_rotate_artifacts_count = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: ansible_runner_timeout = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: app = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: cmdline = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: collection_doc_cache_path = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: config = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: container_engine = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: container_options = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: display_color = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: editor_command = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: editor_console = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: execution_environment = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: execution_environment_image = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: execution_environment_volume_mounts = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: help_config = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: help_doc = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: help_inventory = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: help_playbook = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: inventory = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: inventory_column = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: log_append = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: log_file = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: log_level = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: mode = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: osc4 = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: pass_environment_variable = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: playbook = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: playbook_artifact_enable = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.762 DEBUG 'ansible_navigator.main' After rollback: playbook_artifact_replay = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.763 DEBUG 'ansible_navigator.main' After rollback: playbook_artifact_save_as = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.763 DEBUG 'ansible_navigator.main' After rollback: plugin_name = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.763 DEBUG 'ansible_navigator.main' After rollback: plugin_type = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.763 DEBUG 'ansible_navigator.main' After rollback: pull_policy = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.763 DEBUG 'ansible_navigator.main' After rollback: set_environment_variable = 'Constants.NOT_SET' (Constants/value has not been set)
+220722122801.763 DEBUG 'ansible_navigator.main' Configuration rollback complete.
+220722122801.763 ERROR 'ansible_navigator.main' Command provided: 'doc -l'
+220722122801.763 ERROR 'ansible_navigator.main' A plugin name is required when using the doc subcommand
+220722122801.763 INFO 'ansible_navigator.main' Try again with 'doc <plugin_name>'
+220722122801.763 ERROR 'ansible_navigator.main' Configuration failed, using default log file location: /root/ansible-exercises/ansible-navigator.log. Log level set to debug
+220722122801.763 INFO 'ansible_navigator.main' Review the hints and log file to see what went wrong: /root/ansible-exercises/ansible-navigator.log
+220722123118.794 WARNING 'ansible_navigator.run' Dirty exit, killing the pid
+220722123318.414 ERROR 'ansible_navigator.actions.inventory._collect_inventory_details_interactive' Errors were encountered while gathering the inventory:
+220722123830.428 WARNING 'ansible_navigator.actions.collections._parse' No collections found in execution environment, searched in /root/ansible-exercises/collections:/usr/lib/python3.8/site-packages:/usr/lib64/python3.8/site-packages:/usr/local/lib/python3.8/site-packages:/usr/local/lib64/python3.8/site-packages:/usr/lib64/python3.8/lib-dynload:/usr/lib64/python3.8:/usr/lib64/python38.zip:/usr/share/ansible_navigator/utils:/usr/lib/python3.8/site-packages/ansible/_vendor
+220722123926.893 WARNING 'ansible_navigator.run' Dirty exit, killing the pid
+220722124329.724 WARNING 'ansible_navigator.run' Dirty exit, killing the pid
+220722124715.720 WARNING 'ansible_navigator.actions.collections._parse' No collections found in execution environment, searched in /root/ansible-exercises/collections:/usr/lib/python3.8/site-packages:/usr/lib64/python3.8/site-packages:/usr/local/lib/python3.8/site-packages:/usr/local/lib64/python3.8/site-packages:/usr/lib64/python3.8/lib-dynload:/usr/lib64/python3.8:/usr/lib64/python38.zip:/usr/share/ansible_navigator/utils:/usr/lib/python3.8/site-packages/ansible/_vendor
+220722125157.124 ERROR 'ansible_navigator.actions.collections._parse' /usr/share/ansible/collections/ansible_collections/redhat/rhv/plugins/test/ovirt_proxied_check.py AttributeError (get_docstring): 'AnsibleUnicode' object has no attribute 'get'
+220722125423.078 WARNING 'ansible_navigator.image_manager.puller._log_message' Image inspection failed, image assumed to be corrupted or missing
+220722125503.238 WARNING 'ansible_navigator.actions.collections._parse' No collections found in execution environment, searched in /root/ansible-exercises/collections:/home/runner/.ansible/collections:/usr/share/ansible/collections:/usr/lib/python3.8/site-packages:/usr/lib64/python3.8/site-packages:/usr/local/lib/python3.8/site-packages:/usr/local/lib64/python3.8/site-packages:/usr/lib64/python3.8/lib-dynload:/usr/lib64/python3.8:/usr/lib64/python38.zip:/usr/share/ansible_navigator/utils
+220722125535.023 WARNING 'ansible_navigator.actions.collections._parse' No collections found in execution environment, searched in /root/ansible-exercises/collections:/home/runner/.ansible/collections:/usr/share/ansible/collections:/usr/lib/python3.8/site-packages:/usr/lib64/python3.8/site-packages:/usr/local/lib/python3.8/site-packages:/usr/local/lib64/python3.8/site-packages:/usr/lib64/python3.8/lib-dynload:/usr/lib64/python3.8:/usr/lib64/python38.zip:/usr/share/ansible_navigator/utils
