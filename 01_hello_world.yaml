@@ -1,0 +1,13 @@
+---
+- name: Hello World Play
+  remote_user: devops
+  become: yes
+  become_method: sudo
+  become_user: root
+  gather_facts: false 
+  hosts: all
+  tasks:
+    - name: Update /etc/motd file 
+      copy: 
+        content: "Hello World!\n"
+        dest: /etc/motd

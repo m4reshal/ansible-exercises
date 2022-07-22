@@ -1,0 +1,16 @@
+---
+- name: jinja example
+  hosts: windows_hosts
+  tasks:
+    - name: Create template
+      win_template:
+        src: templates/template.j2
+        dest: C:\Temp\template.txt
+
+    - name: Read file content
+      win_shell: 'type C:\Temp\template.txt'
+      register: content
+
+    - name: Print content
+      debug:
+        msg: "{{ content.stdout_lines }}"

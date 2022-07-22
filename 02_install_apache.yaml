@@ -1,0 +1,27 @@
+---
+- name: Install Apache and Start Service
+  remote_user: devops
+  become: yes
+  become_method: sudo
+  become_user: root
+  gather_facts: false
+  hosts: webservers
+  tasks:
+    - name: Install httpd package
+      yum:
+        name: httpd
+        state: latest 
+
+
+    - name: Copy index file
+      copy:
+        src: files/index.html
+        dest: /var/www/html/index.html
+      register: copy_output
+
+    - name: Start httpd service
+      service:
+        name: httpd
+        state: restarted
+        enabled: yes
+      when: copy_output.changed

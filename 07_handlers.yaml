@@ -1,0 +1,35 @@
+---
+- name: Handlers example
+  hosts: windows_hosts
+  gather_facts: false
+  vars:
+    skip_debug: false
+  tasks:
+    - name:  Gather some info
+      setup:
+      
+    - name: Print some message
+      debug:
+        msg: " All conditions are true"
+      when: 
+        - "'Windows' in ansible_distribution"
+        - ansible_memtotal_mb >= 4096 and ansible_architecture == '64-bit'
+        - not skip_debug
+
+    - name: Edit config file
+      win_lineinfile:
+        path: C:\Temp\example_config.txt
+        regex: '^name='
+        line: 'name=importantconfigvalue'
+      notify:
+        - Second handler task
+        - First handler task
+
+  handlers:
+    - name: First handler task
+      debug:
+        msg: "İlk siradaki handler execute edildi"
+
+    - name: Second handler task
+      debug:
+        msg: "İkinci siradaki handler execute edildi"

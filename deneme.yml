@@ -1,0 +1,17 @@
+---
+- name: deneme
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  tasks:
+  - name: deneme 1
+    community.vmware.vcenter_folder:
+      hostname: 192.168.1.3 #'{{ vcenter_hostname }}'
+      username: kullanici #'{{ vcenter_username }}'
+      password: sifrevs  #'{{ vcenter_password }}'
+      datacenter_name: datacenter_name
+      folder_name: sample_vm_folder
+      folder_type: vm
+      state: present
+    register: vm_folder_creation_result
+    delegate_to: localhost
