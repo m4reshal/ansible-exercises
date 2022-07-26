@@ -8,6 +8,7 @@ ansible-navigator:
     image: registry.redhat.io/ansible-automation-platform-21/ee-supported-rhel8:latest
     #image: registry.redhat.io/ansible-automation-platform-21/ee-29-rhel8:latest
     #image: registry.redhat.io/ansible-automation-platform-21/ee-minimal-rhel8:latest
+    #image: automationhub.konsalt.info/ee-supported-custom:v1.0
     enabled: true
     container-engine: podman
     pull-policy: missing
