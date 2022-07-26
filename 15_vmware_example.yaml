@@ -11,7 +11,7 @@
         password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
         validate_certs: False
         datacenter: "KonsaltDC"
-        folder: /Ansible
+        folder: /RedHat
         name: "satellite"
         schema: "vsphere"
         #properties: ["config.hardware.memoryMB", "config.hardware.numCPU", "guest.disk", "overallStatus"]
