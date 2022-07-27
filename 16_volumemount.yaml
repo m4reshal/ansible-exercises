@@ -1,0 +1,21 @@
+- name: Just test  volumemounts
+  hosts: localhost
+  gather_facts: yes
+  vars:
+    vm_info: 
+      vmname: samplevm
+      ip: 10.200.10.10
+  tasks:
+    - name: Read data from host
+      ansible.builtin.debug:
+        msg: "{{ lookup('file','/mydata/example.txt') }}"
+
+    - name: Write content to a new file
+      ansible.builtin.copy:
+        dest: "/mydata/example_write.txt"
+        content: "{{ vm_info | to_nice_yaml }}"
+
+
+    - name: Read data from  newly created file
+      ansible.builtin.debug:
+        msg: "{{ lookup('file','/mydata/example_write.txt') }}"

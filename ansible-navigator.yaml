@@ -15,6 +15,9 @@ ansible-navigator:
     volume-mounts:
     - src: "/etc/ansible/"
       dest: "/etc/ansible/"
+    - src: "/mydata"
+      dest: "/mydata"
+      options: "Z"
   playbook-artifact:
     enable: True
     replay: /tmp/test_artifact.json
