@@ -17,3 +17,17 @@
         #properties: ["config.hardware.memoryMB", "config.hardware.numCPU", "guest.disk", "overallStatus"]
         #properties: ["config.hardware.memoryMB", "config.hardware.numCPU", "guest.guestFullName", "resourcePool.summary.name","guest.hostName", "name", "guest.disk", "overallStatus"]
       register: vm_info
+
+    - name: Read data from host
+      ansible.builtin.debug:
+        msg: "{{ lookup('file','/mydata/example.txt') }}"
+
+    - name: Write content to a new file
+      ansible.builtin.copy:
+        dest: "/mydata/example_write.txt"
+        content: "{{ vm_info | to_yaml }}"
+
+
+    - name: Read data from  newly created file
+      ansible.builtin.debug:
+        msg: "{{ lookup('file','/mydata/example_write.txt') }}"
