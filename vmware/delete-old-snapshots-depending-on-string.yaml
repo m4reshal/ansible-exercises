@@ -5,7 +5,7 @@
     scheduled_job: False
     vm_list:
       - rheldev
-      #- rheldev2
+      - rheldev2
   tasks:
     - name: Create a vm_list from All the VM's in Vcenter If scheduled_job variable is enabled (Set as True).
       block:
