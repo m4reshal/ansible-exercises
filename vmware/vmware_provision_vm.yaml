@@ -1,0 +1,44 @@
+- name: Create VM from template
+  hosts: localhost
+  gather_facts: no
+#  vars:
+#    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+    - name: create a vm from a template
+      vmware_guest:
+        hostname: '{{ lookup("env", "VMWARE_HOST") }}'
+        username: '{{ lookup("env", "VMWARE_USER") }}'
+        password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
+        validate_certs: False
+        datacenter: "Konsalt-MESA"
+        datastore: ds_nas1
+        state: poweredon
+        folder: "/Ansible"
+        #template: "rhel7_template"
+        template: "rhel-7-template"
+        #template: "deneme90"
+        name: "{{ vmname }}"
+        cluster: "SuperMicro"
+        annotation:
+        hardware:
+          memory_mb: 1024
+          num_cpus: 1
+          hotadd_cpu: True
+          hotremove_cpu: True
+          hotadd_memory: True
+          hotremove_memory: True
+        networks:
+        - name: "VM Network"
+          start_connected: True
+          ip: "{{ vmip }}"
+          netmask: "255.255.0.0"
+          gateway: "192.168.0.1"
+          #wait_for_ip_address: True
+        customization:
+          hostname: "{{ vmname }}"
+          domain: "konsalt.info"
+          dns_servers:
+            - 192.168.1.10
+        wait_for_ip_address: True
+        wait_for_customization: yes
+      #delegate_to: localhost
