@@ -11,9 +11,9 @@
     username: '{{ lookup("env", "VMWARE_USER") }}'
     password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
     vchost: '{{ lookup("env", "VMWARE_HOST") }}'
-    tower_username: '{{ lookup("env", "TOWER_USERNAME") }}'
-    tower_password: '{{ lookup("env", "TOWER_PASSWORD") }}'
-    tower_host: '{{ lookup("env", "TOWER_HOST") }}'
+    tower_username: '{{ lookup("env", "CONTROLLER_USERNAME") }}'
+    tower_password: '{{ lookup("env", "CONTROLLER_PASSWORD") }}'
+    tower_host: '{{ lookup("env", "CONTROLLER_HOST") }}'
     linux_username: "root"
     #linux_username: "{{ ansible_user }}"
     linux_password: "{{ ansible_password }}"
@@ -118,12 +118,11 @@
             body:
               extra_vars:
                 vmname: rheldev
-            url: '{{ lookup("env", "TOWER_HOST") }}/api/v2/job_templates/103/launch/'
-            #url: "http://atower.konsalt.info/api/v2/job_templates/103/launch/"
+            url: '{{ lookup("env", "CONTROLLER_HOST") }}/api/v2/job_templates/16/launch/'
             #url: "http://192.168.3.151/api/v2/job_templates/103/launch/"
             method: POST
-            url_username: '{{ lookup("env", "TOWER_USERNAME") }}'
-            url_password: '{{ lookup("env", "TOWER_PASSWORD") }}'
+            url_username: '{{ lookup("env", "CONTROLLER_USERNAME") }}'
+            url_password: '{{ lookup("env", "CONTROLLER_PASSWORD") }}'
             status_code: [200,201 ,202]
             force_basic_auth: yes
             validate_certs: False
@@ -133,9 +132,9 @@
           tower_job_wait:
             #job_id: "{{ request_response.results[loop_index].json.id }}"
             job_id: "{{ request_response.json.id }}"
-            tower_host: '{{ lookup("env", "TOWER_HOST") }}'
-            tower_username: '{{ lookup("env", "TOWER_USERNAME") }}'
-            tower_password: '{{ lookup("env", "TOWER_PASSWORD") }}'
+            tower_host: '{{ lookup("env", "CONTROLLER_HOST") }}'
+            tower_username: '{{ lookup("env", "CONTROLLER_USERNAME") }}'
+            tower_password: '{{ lookup("env", "CONTROLLER_PASSWORD") }}'
             validate_certs: False
           register: tower_job_status
           when: request_response.json.id is defined
@@ -164,10 +163,10 @@
               #rrule: "DTSTART:{{ schedule_time.stdout }} RRULE:FREQ=NONE;INTERVAL=1;COUNT=1" #Calismiyor. None diye bir option mevcut degil.
               extra_data:
                 vm_list: "{{ parsed_vm_list }}"
-            url: '{{ lookup("env", "TOWER_HOST") }}/api/v2/job_templates/145/schedules/'
+            url: '{{ lookup("env", "CONTROLLER_HOST") }}/api/v2/job_templates/14/schedules/'
             method: POST
-            url_username: '{{ lookup("env", "TOWER_USERNAME") }}'
-            url_password: '{{ lookup("env", "TOWER_PASSWORD") }}'
+            url_username: '{{ lookup("env", "CONTROLLER_USERNAME") }}'
+            url_password: '{{ lookup("env", "CONTROLLER_PASSWORD") }}'
             status_code: [200,201 ,202]
             force_basic_auth: yes
             validate_certs: False
@@ -179,10 +178,10 @@
         - name: Get  Scheduled Jobs of a Job Template
           uri:
             body_format: json
-            url: '{{ lookup("env", "TOWER_HOST") }}/api/v2/job_templates/145/schedules/?page_size=100'
+            url: '{{ lookup("env", "CONTROLLER_HOST") }}/api/v2/job_templates/145/schedules/?page_size=100'
             method: GET
-            url_username: '{{ lookup("env", "TOWER_USERNAME") }}'
-            url_password: '{{ lookup("env", "TOWER_PASSWORD") }}'
+            url_username: '{{ lookup("env", "CONTROLLER_USERNAME") }}'
+            url_password: '{{ lookup("env", "CONTROLLER_PASSWORD") }}'
             status_code: [200,201 ,202]
             force_basic_auth: yes
             validate_certs: False
@@ -202,11 +201,11 @@
         - name: Delete  Scheduled Jobs of a Job Template
           uri:
             body_format: json
-            url: '{{ lookup("env", "TOWER_HOST") }}/api/v2/schedules/{{ item.id | string }}/'
-            #url: '{{ lookup("env", "TOWER_HOST") }}/api/v2/job_templates/103/schedules/{{ item.id | string }}/'
+            url: '{{ lookup("env", "CONTROLLER_HOST") }}/api/v2/schedules/{{ item.id | string }}/'
+            #url: '{{ lookup("env", "CONTROLLER_HOST") }}/api/v2/job_templates/103/schedules/{{ item.id | string }}/'
             method: DELETE
-            url_username: '{{ lookup("env", "TOWER_USERNAME") }}'
-            url_password: '{{ lookup("env", "TOWER_PASSWORD") }}'
+            url_username: '{{ lookup("env", "CONTROLLER_USERNAME") }}'
+            url_password: '{{ lookup("env", "CONTROLLER_PASSWORD") }}'
             status_code: [200,201 ,202, 204]
             force_basic_auth: yes
             validate_certs: False
@@ -226,9 +225,9 @@
     username: '{{ lookup("env", "VMWARE_USER") }}'
     password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
     vchost: '{{ lookup("env", "VMWARE_HOST") }}'
-    tower_username: '{{ lookup("env", "TOWER_USERNAME") }}'
-    tower_password: '{{ lookup("env", "TOWER_PASSWORD") }}'
-    tower_host: '{{ lookup("env", "TOWER_HOST") }}'
+    tower_username: '{{ lookup("env", "CONTROLLER_USERNAME") }}'
+    tower_password: '{{ lookup("env", "CONTROLLER_PASSWORD") }}'
+    tower_host: '{{ lookup("env", "CONTROLLER_HOST") }}'
     linux_username: "root"
     #linux_username: "{{ ansible_user }}"
     linux_password: "{{ ansible_password }}"
