@@ -3,6 +3,7 @@
   gather_facts: yes
   vars:
     scheduled_job: False
+    skip_delete: false
     vm_list:
       - rheldev
       - rheldev2
@@ -60,6 +61,7 @@
       when:
         - snap_delete_list | length >0
         - snap_delete_list is defined
+        - not ( skip_delete | bool )
 
     - name: Deleting Snapshots Older than 3 days and Created by Ansible Automation for Patch Management
       debug:
