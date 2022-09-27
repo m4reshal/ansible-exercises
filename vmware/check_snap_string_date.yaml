@@ -1,0 +1,8 @@
+---
+     - name:  Create a list of Snaps to be deleted
+       set_fact:
+         snap_delete_list: "{{ snap_delete_list|d([]) + [ { 'vmname': var, 'snapname': item.name} ] }}"
+       when:
+        - "(( ansible_date_time.epoch | int ) - (( item.creation_time | regex_search('.*\\.') | regex_replace('T',' ') | regex_replace('\\.','') | to_datetime ).strftime('%s') | int)) / 86400 > 3"
+        - "'auto_ansible_patch_management' in item.name|string"
+       loop: "{{ snapshot_info.results[loop_index].guest_snapshots.snapshots | default([]) }}"

@@ -1,0 +1,76 @@
+- name: Delete Snapshot of VMs ( Older than 3 days and consists specific string  in the snapshot's name )
+  hosts: localhost
+  gather_facts: yes
+  vars:
+    scheduled_job: False
+    vm_list:
+      - rheldev
+      #- rheldev2
+  tasks:
+    - name: Create a vm_list from All the VM's in Vcenter If scheduled_job variable is enabled (Set as True).
+      block:
+        - name: Gather all VM's in The Vcenter when vm_list is not provided or Template is going to be Scheduled.
+          vmware_vm_info:
+            hostname: '{{ lookup("env", "VMWARE_HOST") }}'
+            username: '{{ lookup("env", "VMWARE_USER") }}'
+            password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
+            validate_certs: False
+            vm_type: vm
+          register: vm_info
+
+        - name: Assign VM names into a Variable
+          set_fact:
+            vm_list: "{{ vm_info.virtual_machines | json_query(query) }}"
+          vars:
+            query: "[*].guest_name"
+      when: scheduled_job| bool
+
+    - name: List Snapshots of vms
+      vmware_guest_snapshot_info:
+        hostname: '{{ lookup("env", "VMWARE_HOST") }}'
+        username: '{{ lookup("env", "VMWARE_USER") }}'
+        password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
+        validate_certs: False
+        datacenter: "Konsalt-MESA"
+        folder: /
+        name: "{{ item }}"
+      loop: "{{ vm_list }}"
+      register: snapshot_info
+
+    - name: Check Every Snap for String and Date and Return a List of Snaps to be Deleted
+      include_tasks: check_snap_string_date.yaml
+      loop: "{{ vm_list }}"
+      loop_control:
+        loop_var: var
+        index_var: loop_index
+
+    - name: Delete snapshots
+      vmware_guest_snapshot:
+        hostname: '{{ lookup("env", "VMWARE_HOST") }}'
+        username: '{{ lookup("env", "VMWARE_USER") }}'
+        password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
+        validate_certs: False
+        datacenter: "Konsalt-MESA"
+        state: absent
+        folder: /
+        name: "{{ item.vmname }}"
+        snapshot_name: "{{ item.snapname }}"
+      #loop: "{{ snap_delete_list | default([]) }}"
+      loop: "{{ lookup('items', snap_delete_list| default([]), wantlist=True) }}"
+      when:
+        - snap_delete_list | length >0
+        - snap_delete_list is defined
+
+    - name: Deleting Snapshots Older than 3 days and Created by Ansible Automation for Patch Management
+      debug:
+        msg: "Snapshot of VM: \'{{ item.vmname }}\' with a name of  \'{{ item.snapname }}\' has been deleted"
+      loop: "{{ snap_delete_list | default([]) }}"
+      when:
+        - snap_delete_list | length >0
+        - snap_delete_list is defined
+      #loop: "{{ snapshot_info.results|subelements('guest_snapshots.snapshots') }}"
+
+    - name: No Snapshots Found
+      debug:
+        msg: "No Snapshot has been found according to criterias ( Older Than 3 Days and Created by Ansible Automation for Patch Management)"
+      when: snap_delete_list | length == 0 or snap_delete_list is not defined
