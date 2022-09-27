@@ -373,7 +373,7 @@
           #become_method: sudo
           when: net is succeeded
 
-        - name: Installing katello-agent
+        - name: Upgrade packages
           yum:
             name: '*'
             state: latest
