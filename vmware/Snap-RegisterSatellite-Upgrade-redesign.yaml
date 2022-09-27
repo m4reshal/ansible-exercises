@@ -178,7 +178,7 @@
         - name: Get  Scheduled Jobs of a Job Template
           uri:
             body_format: json
-            url: '{{ lookup("env", "CONTROLLER_HOST") }}/api/v2/job_templates/145/schedules/?page_size=100'
+            url: '{{ lookup("env", "CONTROLLER_HOST") }}/api/v2/job_templates/14/schedules/?page_size=100'
             method: GET
             url_username: '{{ lookup("env", "CONTROLLER_USERNAME") }}'
             url_password: '{{ lookup("env", "CONTROLLER_PASSWORD") }}'
@@ -268,7 +268,7 @@
             #- 5671
           register: net
           
-        - meta: end_play
+        #- meta: end_play
         
         - name: Print result
           fail:
@@ -380,7 +380,9 @@
             enablerepo: rhel-7-server-*,satellite-tools-*
             disablerepo: "*"
           register: yumcommandout
+
         - debug: var=yumcommandout
+
         #- name: upgrade packages via yum
         #  shell:
         #    cmd: "yum -y update  --security --disablerepo=* --enablerepo=rhel-7-server-*"
