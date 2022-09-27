@@ -63,7 +63,7 @@
 
     - name: Deleting Snapshots Older than 3 days and Created by Ansible Automation for Patch Management
       debug:
-        msg: "Snapshot of VM: \'{{ item.vmname }}\' with a name of  \'{{ item.snapname }}\' has been deleted"
+        msg: "Snapshot of VM: '{{ item.vmname }}' with a name of  '{{ item.snapname }}' has been deleted"
       loop: "{{ snap_delete_list | default([]) }}"
       when:
         - snap_delete_list | length >0
