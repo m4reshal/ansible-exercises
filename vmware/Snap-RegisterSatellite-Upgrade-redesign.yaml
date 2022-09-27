@@ -1,0 +1,432 @@
+- name: Take Snapshot of vm, Register to Satellite And Do Upgrades
+  hosts: localhost
+  #hosts: all
+  connection: ssh
+  gather_facts: no
+  vars:
+    host_satellite: satellite.konsalt.info
+    org: "Default_Organization"
+    key: "RHELDEV"
+    ansible_python_interpreter: /usr/bin/python
+    username: '{{ lookup("env", "VMWARE_USER") }}'
+    password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
+    vchost: '{{ lookup("env", "VMWARE_HOST") }}'
+    tower_username: '{{ lookup("env", "TOWER_USERNAME") }}'
+    tower_password: '{{ lookup("env", "TOWER_PASSWORD") }}'
+    tower_host: '{{ lookup("env", "TOWER_HOST") }}'
+    linux_username: "root"
+    #linux_username: "{{ ansible_user }}"
+    linux_password: "{{ ansible_password }}"
+    #skip_snapshot: true
+    skip_snapshot: false
+    #vm_list:
+    #  - vmname: rheldev
+    #vmtag: devservice #ornek kullanim
+  tasks:
+    - name: Snap block on localhost
+      block:
+        - name: Generate vm_list in this block 
+          block:
+            - name: Create a vm_list from inventory dynamically
+              set_fact:
+                #vm_list: "{{ vm_list |d([]) + [ {'vmname': item, 'os_ip': hostvars[item].ansible_host } ] }}"
+                vm_list: "{{ vm_list |d([]) + [ {'vmname': item } ] }}"
+              with_inventory_hostnames:
+              - "vm_tag_{{ vmtag }}"
+              #- all
+              when: vmtag is defined
+
+        - name: Print vm_list variable
+          debug:
+            msg: "{{ vm_list }}"
+
+        #- meta: end_play
+
+        - name: Collect Current Date Time from OS
+          setup:
+            gather_subset:
+              - min
+          register: host_facts
+
+        - name: List Snapshots of vm
+          vmware_guest_snapshot_info:
+            hostname: "{{ vchost  }}"
+            username: "{{ username }}"
+            password: "{{ password }}"
+            validate_certs: False
+            datacenter: "Konsalt-MESA"
+            folder: /
+            name: "{{ item.vmname }}"
+          loop: "{{ vm_list }}"
+          register: snapshot_info
+
+        - name: Assign number of snapshots to a variable
+          vars:
+            query: "results[*].guest_snapshots.snapshots[*].name"
+            #query: "guest_snapshots.snapshots[*].name"
+          set_fact:
+            current_snapshots: "{{ snapshot_info | json_query(query) }}"
+
+
+        - name:  Take a new Snapshot with the ansible_patch_management name If VMs does not have one taken in last 3 hours
+          include_tasks: check_snap_string_date_for_new_snap.yaml
+          loop: "{{ vm_list }}"
+          loop_control:
+            loop_var: var
+            index_var: loop_index
+
+        - name: Take Snapshot of vm
+          vars:
+            query: "[*].vmname"
+          vmware_guest_snapshot:
+            hostname: "{{ vchost  }}"
+            username: "{{ username }}"
+            password: "{{ password }}"
+            validate_certs: False
+            datacenter: "KonsaltDC"
+            state: present
+            folder: /Ansible
+            name: "{{ item.vmname }}"
+            snapshot_name: "{{ item.vmname }} auto_ansible_patch_management {{ ansible_date_time.iso8601 }}"
+            description: "Created via Ansible Tower {{ ansible_date_time.iso8601 }}"
+          loop: "{{ vm_list }}"
+          loop_control:
+            index_var: loop_index
+          when:
+            - item.vmname not in (vms_with_already_snap_list|default([]) | json_query(query) )
+            - not skip_snapshot
+
+        - name: Create temporary inventory ( to find which user should be used for connection)
+          include_tasks: Rhel_create_temporary_inventory.yaml
+          loop: "{{ vm_list }}"
+      #delegate_to: localhost
+      #run_once: true
+
+- name: Trigger a job template using URI module and schedule a job template
+  hosts: localhost
+  vars:
+    skip_immediate_job: True
+    skip_future_job: False
+    skip_delete_jobs: False
+  tasks:
+    #- meta: end_play
+    - name: Trigger "List Snapshots of a VM" job
+      block:
+        - name: Trigger "List Snapshots of a VM" job
+          uri:
+            body_format: json
+            body:
+              extra_vars:
+                vmname: rheldev
+            url: '{{ lookup("env", "TOWER_HOST") }}/api/v2/job_templates/103/launch/'
+            #url: "http://atower.konsalt.info/api/v2/job_templates/103/launch/"
+            #url: "http://192.168.3.151/api/v2/job_templates/103/launch/"
+            method: POST
+            url_username: '{{ lookup("env", "TOWER_USERNAME") }}'
+            url_password: '{{ lookup("env", "TOWER_PASSWORD") }}'
+            status_code: [200,201 ,202]
+            force_basic_auth: yes
+            validate_certs: False
+          register: request_response
+
+        - name: Wait for the job completion
+          tower_job_wait:
+            #job_id: "{{ request_response.results[loop_index].json.id }}"
+            job_id: "{{ request_response.json.id }}"
+            tower_host: '{{ lookup("env", "TOWER_HOST") }}'
+            tower_username: '{{ lookup("env", "TOWER_USERNAME") }}'
+            tower_password: '{{ lookup("env", "TOWER_PASSWORD") }}'
+            validate_certs: False
+          register: tower_job_status
+          when: request_response.json.id is defined
+      when: not skip_immediate_job
+
+    - name: Create a Scheduled Future Job
+      block:
+        - name: Create a rrule for 3 days later in UTC format
+          shell: "date -u -d now+3days +%Y%m%dT%H%M%SZ"
+          register: schedule_time
+
+        - name: Parse vm_list variable for Deleting Snapshot future jobs
+          vars:
+            json_query_for_vmlist: "[*].vmname"
+
+          set_fact:
+            parsed_vm_list: "{{ vm_list | json_query(json_query_for_vmlist) }}"
+
+        - name: Create a Scheduled Job from Job Template
+          uri:
+            body_format: json
+            body:
+              name: "Delete-snapshots-{{ tower_job_id }}"
+              #rrule: "DTSTART:20220106T103500Z RRULE:FREQ=DAILY;INTERVAL=1;COUNT=1"
+              rrule: "DTSTART:{{ schedule_time.stdout }} RRULE:FREQ=DAILY;INTERVAL=1;COUNT=1"
+              #rrule: "DTSTART:{{ schedule_time.stdout }} RRULE:FREQ=NONE;INTERVAL=1;COUNT=1" #Calismiyor. None diye bir option mevcut degil.
+              extra_data:
+                vm_list: "{{ parsed_vm_list }}"
+            url: '{{ lookup("env", "TOWER_HOST") }}/api/v2/job_templates/145/schedules/'
+            method: POST
+            url_username: '{{ lookup("env", "TOWER_USERNAME") }}'
+            url_password: '{{ lookup("env", "TOWER_PASSWORD") }}'
+            status_code: [200,201 ,202]
+            force_basic_auth: yes
+            validate_certs: False
+          register: schedule_response
+      when: not skip_future_job
+
+    - name: Clean  Scheduled Jobs That have been run once and for all.
+      block:
+        - name: Get  Scheduled Jobs of a Job Template
+          uri:
+            body_format: json
+            url: '{{ lookup("env", "TOWER_HOST") }}/api/v2/job_templates/145/schedules/?page_size=100'
+            method: GET
+            url_username: '{{ lookup("env", "TOWER_USERNAME") }}'
+            url_password: '{{ lookup("env", "TOWER_PASSWORD") }}'
+            status_code: [200,201 ,202]
+            force_basic_auth: yes
+            validate_certs: False
+          register: schedule_list_response
+
+        - name: Set a query to find Schedules to be Deleted
+          set_fact:
+            no_next_run_query: "json.results[].{id: id, next_run: not_null(next_run, 'novalue')}" # null degerler hataya neden oldugu icin novalue degerini atadik.
+            no_next_run_query2: "[?contains(next_run,'novalue')].{id: id}"
+            #_query: "[].{id: id, next_run: next_run || 'novalue')}"
+            #no_next_run_query: "json.results[?contains(next_run,'{{ string }}')]"
+        - name: Get id list of Schedules to be deleted
+          set_fact:
+            delete_id_list: "{{ schedule_list_response | to_json | from_json | json_query(no_next_run_query) | json_query(no_next_run_query2)}}"
+
+
+        - name: Delete  Scheduled Jobs of a Job Template
+          uri:
+            body_format: json
+            url: '{{ lookup("env", "TOWER_HOST") }}/api/v2/schedules/{{ item.id | string }}/'
+            #url: '{{ lookup("env", "TOWER_HOST") }}/api/v2/job_templates/103/schedules/{{ item.id | string }}/'
+            method: DELETE
+            url_username: '{{ lookup("env", "TOWER_USERNAME") }}'
+            url_password: '{{ lookup("env", "TOWER_PASSWORD") }}'
+            status_code: [200,201 ,202, 204]
+            force_basic_auth: yes
+            validate_certs: False
+          loop: "{{ delete_id_list }}"
+          when: delete_id_list | length > 0
+      when: not skip_delete_jobs
+
+- name: Start Upgrade at OS level
+  #hosts: all
+  hosts: temporary_upgrade
+  gather_facts: no
+  vars:
+    host_satellite: satellite.konsalt.info
+    org: "Default_Organization"
+    key: "RHELDEV"
+    ansible_python_interpreter: /usr/bin/python
+    username: '{{ lookup("env", "VMWARE_USER") }}'
+    password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
+    vchost: '{{ lookup("env", "VMWARE_HOST") }}'
+    tower_username: '{{ lookup("env", "TOWER_USERNAME") }}'
+    tower_password: '{{ lookup("env", "TOWER_PASSWORD") }}'
+    tower_host: '{{ lookup("env", "TOWER_HOST") }}'
+    linux_username: "root"
+    #linux_username: "{{ ansible_user }}"
+    linux_password: "{{ ansible_password }}"
+  tasks:
+    - name: Start Register to Satellite and Upgrade Tasks
+      block:
+        - name: Wait for the connection of the new VM
+          wait_for_connection:
+            timeout: 300
+            sleep: 2
+
+        - name: Just Execute Shell Command
+          ignore_errors: yes
+          shell:
+            cmd: "ls -l /root/DO180-apps"
+
+        - name: Collect Information for VMs to Determine OS Version
+          setup:
+            gather_subset:
+              - min
+
+        - name: Assign Minor Version to Variable
+          set_fact:
+            minor_ver: "{{ ansible_distribution_version| replace('.','') }}"
+
+        - name: Check network connectivity to {{ host_satellite }}
+          wait_for:
+            host: "{{ host_satellite }}"
+            port: "{{ item }}"
+            state: started
+            delay: 0
+            timeout: 3
+          ignore_errors: true
+          loop:
+            - 80
+            - 443
+            #- 5647
+            #- 5671
+          register: net
+          
+        - meta: end_play
+        
+        - name: Print result
+          fail:
+            msg: "{{ inventory_hostname }} sunucusundan {{ host_satellite }} sunucusuna dogru {{ var.invocation.module_args.port }} portu icin network erisimi kontrol edilmelidir"
+          when: var.failed
+          loop: "{{ net.results }}"
+          loop_control:
+            loop_var: var
+
+        - name: Commenting out proxy on /etc/yum.conf
+          replace:
+            path: /etc/yum.conf
+            regexp: '^proxy'
+            replace: '#proxy'
+          #become: true
+          #become_method: sudo
+          when: net is succeeded
+
+        - name: Commenting out proxy on /etc/rhsm/rhsm.conf
+          replace:
+            path: /etc/rhsm/rhsm.conf
+            regexp: '^proxy'
+            replace: '#proxy'
+          #become: true
+          #become_method: sudo
+          when: net is succeeded
+
+
+        - name: Checking proxy in the env
+          shell: env | grep -i proxy
+          register: proxy
+          failed_when: proxy.rc == 0
+          when: net is succeeded
+
+        - name: Determine if katello-ca-consumer package is installed
+          shell: "rpm -qa | grep -i  katello-ca-consumer | wc -l"
+          register: package_info
+
+        - name: Removing any katello package
+          shell: 'for paket in `rpm -qa | grep -i  katello-ca` ; do paketler="${paketler} ${paket}"  ; done  ; rpm -e  $paketler'
+          when: package_info.stdout|int >0
+
+
+        - name: Downloading katello agent from {{ host_satellite }}
+          shell:
+            cmd: "rpm -Uvh http://{{ host_satellite }}/pub/katello-ca-consumer-latest.noarch.rpm"
+          #become: true
+          #become_method: sudo
+          register: katello
+          when: net is succeeded
+
+        - name: Registering RHEL8  system against {{ host_satellite }}
+          redhat_subscription:
+            state: present
+            activationkey: "RHEL84"
+            org_id: "{{ org }}"
+          #become: true
+          #become_method: sudo
+          when:
+            - net is succeeded
+            - katello is succeeded
+            - ansible_distribution_major_version| int  == 8
+
+        - name: Registering RHEL7 system against {{ host_satellite }}
+          redhat_subscription:
+            state: present
+            activationkey: "{{ key | default('RHEL'+minor_ver) }}"
+            org_id: "{{ org }}"
+          #become: true
+          #become_method: sudo
+          when:
+            - net is succeeded
+            - katello is succeeded
+            - ansible_distribution_major_version| int  == 7
+
+        - name: Registering RHEL6 system against {{ host_satellite }}
+          redhat_subscription:
+            state: present
+            activationkey: "RHEL6"
+            org_id: "{{ org }}"
+          #become: true
+          #become_method: sudo
+          when:
+            - net is succeeded
+            - katello is succeeded
+            - ansible_distribution_major_version| int  == 6
+
+        - name: Checking active YUM repositories
+          shell: yum repolist | grep -v This | grep server
+          register: repolist
+          failed_when: repolist == 1
+          #become: true
+          #become_method: sudo
+          when: net is succeeded
+
+
+        - name: Installing katello-agent
+          yum:
+            name: katello-agent
+            state: present
+          #become: true
+          #become_method: sudo
+          when: net is succeeded
+
+        - name: Installing katello-agent
+          yum:
+            name: '*'
+            state: latest
+            enablerepo: rhel-7-server-*,satellite-tools-*
+            disablerepo: "*"
+          register: yumcommandout
+        - debug: var=yumcommandout
+        #- name: upgrade packages via yum
+        #  shell:
+        #    cmd: "yum -y update  --security --disablerepo=* --enablerepo=rhel-7-server-*"
+        #  register: yumcommandout
+        #  when: ansible_distribution_major_version| int  == 7
+
+        - name: upgrade packages via yum
+          shell:
+            cmd: "yum -y update  --security --disablerepo=* --enablerepo=rhel-8-for-x86_64-*,satellite-tools-6.9-for-rhel-8-x86_64-rpms"
+          register: yumcommandout
+          when: ansible_distribution_major_version| int  == 8
+
+        - name: Print errors if yum failed
+          debug:
+            msg: "yum command produced errors"
+          when: yumcommandout is not defined
+
+        - name: check to see if we need a reboot
+          command: needs-restarting -r
+          register: result
+          ignore_errors: yes
+
+        - name: display result
+          debug:
+            var: result.rc
+
+        - name: Reboot Server if Necessary
+          command: shutdown -r now "Ansible Updates Triggered"
+          become: true
+          async: 30
+          poll: 0
+          when: result.rc == 1
+
+        # This pause is mandatory, otherwise the existing control connection
+        #     # gets reused!
+        #         # (https://gist.github.com/infernix/a968f23c4f4e1d6723e4)
+        - name: Pausing to allow server to shutdown and terminate our SSH connection
+          pause: seconds=30
+          when: result.rc == 1
+
+        - name: Wait for reboot to complete and SSH to become available
+          local_action: wait_for host={{ inventory_hostname }} port=22
+            state=started delay=30 timeout=600
+          retries: 30
+          delay: 10
+          when: result.rc == 1
+
+      #delegate_to: "{{ ip_address }}"

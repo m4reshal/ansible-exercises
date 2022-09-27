@@ -1,0 +1,8 @@
+---
+     - name:  Create a list If VMs have a snap taken in last 3 hours with the name of 'auto_ansible_patch_management'
+       set_fact:
+         vms_with_already_snap_list: "{{ vms_with_already_snap_list|d([]) + [ { 'vmname': var.vmname, 'snapname': item.name} ] }}"
+       when:
+        - "(( ansible_date_time.epoch | int ) - (( item.creation_time | regex_search('.*\\.') | regex_replace('T',' ') | regex_replace('\\.','') | to_datetime ).strftime('%s') | int)) / 3600 < 3"
+        - "'auto_ansible_patch_management' in item.name|string"
+       loop: "{{ snapshot_info.results[loop_index].guest_snapshots.snapshots | default([]) }}"

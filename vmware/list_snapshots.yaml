@@ -1,0 +1,27 @@
+- name: Take Snapshot of vm
+  hosts: localhost
+  gather_facts: yes
+#  vars:
+#    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+    - name: List Snapshots of vm
+      vmware_guest_snapshot_info:
+        hostname: '{{ lookup("env", "VMWARE_HOST") }}'
+        username: '{{ lookup("env", "VMWARE_USER") }}'
+        password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
+        validate_certs: False
+        datacenter: "Konsalt-MESA"
+        folder: /
+        name: "{{ vmname }}"
+      register: snapshot_info
+      delegate_to: localhost
+
+    - name: Assign number of snapshots to a variable
+      vars:
+        query: "guest_snapshots.snapshots[*].name"
+      set_fact:
+        current_snapshots: "{{ snapshot_info | json_query(query) }}"
+    - name: Print Number of Snapshots  of Guest VM
+      debug:
+        msg: "{{ vmname }} sunucusuna ait mevcutta zaten {{ current_snapshots | length }} adet snapshot bulunmaktadir."
+      when: current_snapshots | length >= 1

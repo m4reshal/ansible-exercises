@@ -1,0 +1,58 @@
+---
+    - name: Gather info about the VCenter VM
+      vmware_guest_info:
+        datacenter: "KonsaltDC"
+        name: "{{ item.vmname }}"
+        hostname: "{{ vchost  }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: no
+      until: detailed_info.instance.ipv4 | default('', true) | trim != '' and detailed_info.unreachable is not defined and detailed_info                                                                      is not failed
+      retries: 5
+      delay: 5
+      register: detailed_info
+      when: hostvars[item.vmname].ansible_host is not defined
+
+    - name: Set the "ip_address" variables
+      set_fact:
+        ip_address: "{% if hostvars[item.vmname].ansible_host is defined %}{{ hostvars[item.vmname].ansible_host }}{% else %}{{ detailed_info.instance.ipv4 }}{% endif %}"
+
+    - name: Add the Linux VM to inventory as a temporary host
+      #no_log: true
+      add_host:
+        name: "{{ item.vmname }}"
+        ansible_host: "{{ ip_address }}"
+        #ansible_user:  "{{ linux_username }}"
+        ansible_user:  "automationuser" #Pretend to check with another user
+        ansible_password:  "{{ linux_password }}"
+        ansible_connection: ssh
+        groups: temporary_upgrade
+        ansible_become_method: sudo
+        ansible_become: yes
+        ansible_become_pass: "{{ linux_password }}"
+        ansible_sudo_pass: "{{ linux_password }}"
+
+    - name: Check connection to Operating System with user automationuser
+      ignore_unreachable: yes
+      ping:
+      delegate_to: "{{ item.vmname }}"
+      register: first_user_result
+
+
+    - name: Add the Linux VM to inventory as a temporary host
+      #no_log: true
+      add_host:
+        name: "{{ item.vmname }}"
+        ansible_host: "{{ ip_address }}"
+        ansible_user:  "{{ linux_username }}" #This time with root
+        ansible_password:  "{{ linux_password }}"
+        ansible_connection: ssh
+        groups: temporary_upgrade
+        ansible_become: false
+      when: first_user_result.unreachable | default(False) | ternary(True,False) #first_user_result ile erisebilirsek false ve es gecilecek.
+
+    - name: Check connection to Operating System with user  from credential
+      ignore_unreachable: yes
+      ping:
+      delegate_to: "{{ item.vmname }}"
+      when: first_user_result.unreachable | default(False) | ternary(True,False) #first_user_result ile erisebilirsek false ve es gecilecek.
