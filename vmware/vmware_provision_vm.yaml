@@ -15,8 +15,8 @@
         state: poweredon
         folder: "/Ansible"
         #template: "rhel7_template"
-        template: "newtemplate"
-        #template: "rhel-7-template"
+        #template: "newtemplate"
+        template: "rhel-7-template"
         #template: "deneme90"
         name: "{{ vmname }}"
         cluster: "SuperMicro"
