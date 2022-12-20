@@ -1,5 +1,5 @@
 ARG EE_BASE_IMAGE=automationhub.konsalt.info/ee-29-rhel8:latest
-ARG EE_BUILDER_IMAGE=quay.io/ansible/ansible-builder:latest
+ARG EE_BUILDER_IMAGE=registry.redhat.io/ansible-automation-platform-21/ansible-builder-rhel8
 
 FROM $EE_BASE_IMAGE as galaxy
 ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS=
