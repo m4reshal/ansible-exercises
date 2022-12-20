@@ -18,6 +18,9 @@ ansible-navigator:
     - src: "/mydata"
       dest: "/mydata"
       options: "Z"
+    - src: "/deneme"
+      dest: "/outputs"
+      options: "rw"
   playbook-artifact:
     enable: True
     replay: /tmp/test_artifact.json

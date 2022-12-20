@@ -1,0 +1,36 @@
+- name: Trigger a job template using URI module and schedule a job template
+  hosts: localhost
+  vars:
+    skip_immediate_job: True
+    skip_future_job: False
+    skip_delete_jobs: False
+  tasks:
+    #- meta: end_play
+    - name: Trigger "List Snapshots of a VM" job
+      block:
+        - name: Trigger "List Snapshots of a VM" job
+          uri:
+            body_format: json
+            body:
+              extra_vars:
+                vmname: rheldev
+            url: '{{ lookup("env", "CONTROLLER_HOST") }}/api/v2/job_templates/16/launch/'
+            #url: "http://192.168.3.151/api/v2/job_templates/103/launch/"
+            method: POST
+            url_username: '{{ lookup("env", "CONTROLLER_USERNAME") }}'
+            url_password: '{{ lookup("env", "CONTROLLER_PASSWORD") }}'
+            status_code: [200,201 ,202]
+            force_basic_auth: yes
+            validate_certs: False
+          register: request_response
+
+        - name: Wait for the job completion
+          tower_job_wait:
+            #job_id: "{{ request_response.results[loop_index].json.id }}"
+            job_id: "{{ request_response.json.id }}"
+            tower_host: '{{ lookup("env", "CONTROLLER_HOST") }}'
+            tower_username: '{{ lookup("env", "CONTROLLER_USERNAME") }}'
+            tower_password: '{{ lookup("env", "CONTROLLER_PASSWORD") }}'
+            validate_certs: False
+          register: tower_job_status
+          when: request_response.json.id is defined

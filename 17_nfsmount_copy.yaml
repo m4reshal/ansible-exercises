@@ -1,0 +1,34 @@
+---
+- name: Mount NFS on EE
+  hosts: localhost
+  gather_facts: yes
+  become: true
+  vars:
+    nfsshare: "192.168.1.183:/test"
+    mountpoint: "/outputs"
+    permission: 755
+    mount_opts: 'rw,sync'
+  tasks:
+    - name: Print effective uid 
+      ansible.builtin.shell: id
+
+    #- name: check mountpoint exist
+    #  ansible.builtin.file:
+    #    path: "{{ mountpoint }}"
+    #    state: directory
+    #    mode: "{{ permission }}"
+    #    owner: root
+    #    group: root
+
+    #- name: mount network share
+    #  ansible.posix.mount:
+    #    src: "{{ nfsshare }}"
+    #    path: "{{ mountpoint }}"
+    #    fstype: nfs
+    #    opts: "{{ mount_opts }}"
+    #    state: mounted
+
+    - name: Write to file 
+      ansible.builtin.copy: 
+        content: "Deneme basarili!"
+        dest: "{{ mountpoint }}/execution_env_created.txt"
