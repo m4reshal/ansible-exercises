@@ -4,7 +4,7 @@
   tasks:
     - name: Login into vCenter and get cookies
       uri:
-      url: 'https://{{ lookup("env", "VMWARE_HOST") }}/rest/com/vmware/cis/session'
+        url: 'https://{{ lookup("env", "VMWARE_HOST") }}/rest/com/vmware/cis/session'
         force_basic_auth: yes
         validate_certs: no
         method: POST
