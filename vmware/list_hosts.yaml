@@ -4,12 +4,12 @@
   tasks:
     - name: Login into vCenter and get cookies
       uri:
-       url: 'https://{{ lookup("env", "VMWARE_HOST") }}/rest/com/vmware/cis/session'
+      url: 'https://{{ lookup("env", "VMWARE_HOST") }}/rest/com/vmware/cis/session'
         force_basic_auth: yes
         validate_certs: no
         method: POST
         user: '{{ lookup("env", "VMWARE_USER") }}'
-        password: '{{ lookup("env", "VMWARE_PASSWORD") }}''{{ lookup("env", "VMWARE_PASSWORD") }}'
+        password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
       register: login
 
     - name: Get all hosts from vCenter using cookies from last task
