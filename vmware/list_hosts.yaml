@@ -27,5 +27,7 @@
         username: '{{ lookup("env", "VMWARE_USER") }}'
         password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
         validate_certs: False
+        esxi_hostname: "{{ item.name }}"
+      loop: "{{ vchosts.json.value }}"
       register: host_facts
       delegate_to: localhost
