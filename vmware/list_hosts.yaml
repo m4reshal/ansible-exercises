@@ -2,6 +2,24 @@
   hosts: localhost
   gather_facts: no
   tasks:
+    - name: Login into vCenter and get cookies
+      uri:
+       url: 'https://{{ lookup("env", "VMWARE_HOST") }}/rest/com/vmware/cis/session'
+        force_basic_auth: yes
+        validate_certs: no
+        method: POST
+        user: '{{ lookup("env", "VMWARE_USER") }}'
+        password: '{{ lookup("env", "VMWARE_PASSWORD") }}''{{ lookup("env", "VMWARE_PASSWORD") }}'
+      register: login
+
+    - name: Get all hosts from vCenter using cookies from last task
+      uri:
+        url: 'https://{{ lookup("env", "VMWARE_HOST") }}/rest/vcenter/host'
+        force_basic_auth: yes
+        validate_certs: no
+        headers:
+          Cookie: "{{ login.set_cookie }}"
+      register: vchosts
 
     - name: Gather vmware host facts
       community.vmware.vmware_host_facts:
