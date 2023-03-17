@@ -1,0 +1,13 @@
+- name: List VMs
+  hosts: localhost
+  gather_facts: no
+  tasks:
+
+    - name: Gather vmware host facts
+      community.vmware.vmware_host_facts:
+        hostname: '{{ lookup("env", "VMWARE_HOST") }}'
+        username: '{{ lookup("env", "VMWARE_USER") }}'
+        password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
+        validate_certs: False
+      register: host_facts
+      delegate_to: localhost
