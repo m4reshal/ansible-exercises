@@ -21,6 +21,14 @@
           Cookie: "{{ login.set_cookie }}"
       register: vchosts
 
+    - name: Print vchosts 
+      vars:
+        query: "value[*].name"
+      debug:
+        msg: "hosts are  {{ vchosts.json | json_query(query) }}"
+
+    - meta: end_play
+
     - name: Gather vmware host facts
       community.vmware.vmware_host_facts:
         hostname: '{{ lookup("env", "VMWARE_HOST") }}'
